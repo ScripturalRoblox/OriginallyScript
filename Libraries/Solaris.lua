@@ -169,7 +169,7 @@ local function MakeDraggable(topbarobject, object)
     pcall(function()
 		local dragging, dragInput, mousePos, framePos = false
 		topbarobject.InputBegan:Connect(function(input)
-			if input.UserInputType == Enum.UserInputType.MouseButton1 and input.UserInputType == Enum.UserInputType.Touch then
+			if input.UserInputType == Enum.UserInputType.MouseButton1 or input.UserInputType == Enum.UserInputType.Touch then
 				dragging = true
 				mousePos = input.Position
 				framePos = object.Position
@@ -182,7 +182,7 @@ local function MakeDraggable(topbarobject, object)
 			end
 		end)
 		topbarobject.InputChanged:Connect(function(input)
-			if input.UserInputType == Enum.UserInputType.MouseMovement and input.UserInputType == Enum.UserInputType.Touch then
+			if input.UserInputType == Enum.UserInputType.MouseMovement or input.UserInputType == Enum.UserInputType.Touch then
 				dragInput = input
 			end
 		end)
@@ -519,7 +519,7 @@ function SolarisLib:New(Config)
                 SetValue(value)
 
                 Bind.InputEnded:Connect(function(Input)
-                    if Input.UserInputType == Enum.UserInputType.MouseButton1 and Input.UserInputType == Enum.UserInputType.Touch then
+                    if Input.UserInputType == Enum.UserInputType.MouseButton1 or Input.UserInputType == Enum.UserInputType.Touch then
                         if closebindbinding then return end
                         closebindbinding = true
                         Bind.BText.Text = "..."
@@ -577,7 +577,7 @@ function SolarisLib:New(Config)
                 end   
                 
                 Dropdown.InputEnded:Connect(function(Input)
-                    if Input.UserInputType == Enum.UserInputType.MouseButton1 and Input.UserInputType == Enum.UserInputType.Touch then
+                    if Input.UserInputType == Enum.UserInputType.MouseButton1 or Input.UserInputType == Enum.UserInputType.Touch then
                         opened = not opened
                         Toggle()
                     end
@@ -879,9 +879,9 @@ function SolarisLib:New(Config)
                     Slider.Value = Val
                     callback(Slider.Value)
 				end
-				SliderMain.SliderFrame.InputBegan:Connect(function(input) if input.UserInputType == Enum.UserInputType.MouseButton1 and input.UserInputType == Enum.UserInputType.Touch then dragging = true end end)
-				SliderMain.SliderFrame.InputEnded:Connect(function(input) if input.UserInputType == Enum.UserInputType.MouseButton1 and input.UserInputType == Enum.UserInputType.Touch then dragging = false end end)
-				game:GetService("UserInputService").InputChanged:Connect(function(input) if dragging and input.UserInputType == Enum.UserInputType.MouseMovement and input.UserInputType == Enum.UserInputType.Touch then move(input) end end)
+				SliderMain.SliderFrame.InputBegan:Connect(function(input) if input.UserInputType == Enum.UserInputType.MouseButton1 or input.UserInputType == Enum.UserInputType.Touch then dragging = true end end)
+				SliderMain.SliderFrame.InputEnded:Connect(function(input) if input.UserInputType == Enum.UserInputType.MouseButton1 or input.UserInputType == Enum.UserInputType.Touch then dragging = false end end)
+				game:GetService("UserInputService").InputChanged:Connect(function(input) if dragging and input.UserInputType == Enum.UserInputType.MouseMovement or input.UserInputType == Enum.UserInputType.Touch then move(input) end end)
 
                 function Slider:Set(val)
                     local a = tostring(val and (val / max) * (max - min) + min) or 0
@@ -1097,7 +1097,7 @@ function SolarisLib:New(Config)
                 pcall(callback, ColorPreset.Btn.Box.BackgroundColor3)
 
                 Color.InputBegan:Connect(function(input)
-                    if input.UserInputType == Enum.UserInputType.MouseButton1 and input.UserInputType == Enum.UserInputType.Touch then
+                    if input.UserInputType == Enum.UserInputType.MouseButton1 or input.UserInputType == Enum.UserInputType.Touch then
                         if ColorInput then
                             ColorInput:Disconnect()
                         end
@@ -1113,7 +1113,7 @@ function SolarisLib:New(Config)
                 end)
 
                 Color.InputEnded:Connect(function(input)
-                    if input.UserInputType == Enum.UserInputType.MouseButton1 and input.UserInputType == Enum.UserInputType.Touch then
+                    if input.UserInputType == Enum.UserInputType.MouseButton1 or input.UserInputType == Enum.UserInputType.Touch then
                         if ColorInput then
                             ColorInput:Disconnect()
                         end
@@ -1121,7 +1121,7 @@ function SolarisLib:New(Config)
                 end)
 
                 Hue.InputBegan:Connect(function(input)
-                    if input.UserInputType == Enum.UserInputType.MouseButton1 and input.UserInputType == Enum.UserInputType.Touch then
+                    if input.UserInputType == Enum.UserInputType.MouseButton1 or input.UserInputType == Enum.UserInputType.Touch then
                         if HueInput then
                             HueInput:Disconnect()
                         end
@@ -1138,7 +1138,7 @@ function SolarisLib:New(Config)
                 end)
     
                 Hue.InputEnded:Connect(function(input)
-                    if input.UserInputType == Enum.UserInputType.MouseButton1 and input.UserInputType == Enum.UserInputType.Touch then
+                    if input.UserInputType == Enum.UserInputType.MouseButton1 or input.UserInputType == Enum.UserInputType.Touch then
                         if HueInput then
                             HueInput:Disconnect()
                         end
@@ -1187,7 +1187,7 @@ function SolarisLib:New(Config)
                 TextboxFrame.Box.PlaceholderText = "                  "
 
                 TextboxFrame.InputBegan:Connect(function(input)
-					if input.UserInputType == Enum.UserInputType.MouseButton1 and input.UserInputType == Enum.UserInputType.Touch then
+					if input.UserInputType == Enum.UserInputType.MouseButton1 or input.UserInputType == Enum.UserInputType.Touch then
                         TextboxFrame.Box:CaptureFocus()
 					end
 				end)
@@ -1226,7 +1226,7 @@ function SolarisLib:New(Config)
                 
 
                 BindFrame.InputEnded:Connect(function(Input)
-                    if Input.UserInputType == Enum.UserInputType.MouseButton1 and Input.UserInputType == Enum.UserInputType.Touch then
+                    if Input.UserInputType == Enum.UserInputType.MouseButton1 or Input.UserInputType == Enum.UserInputType.Touch then
                         if Bind.Binding then return end
                         Bind.Binding = true
                         BindFrame.BText.Text = "..."
